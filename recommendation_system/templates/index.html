@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #1c1f26, #3e4a61);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #f9aa33;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #f4f4f4;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        button {
+            background-color: #f9aa33;
+            color: #1c1f26;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #ffaa44;
+            transform: scale(1.05);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #f9aa33;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            {% comment %} text-align: center; {% endcomment %}
+        }
+
+        ul li {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 5px auto;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 400px;
+            transition: transform 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Movie Recommendation System</h1>
+        <form action="/recommend" method="POST">
+            <label for="movie_title">Enter a Movie Title:</label>
+            <input type="text" id="movie_title" name="movie_title" placeholder="e.g., Inception" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        {% if movie_title %}
+            <h3>Top 5 Recommendations for "{{ movie_title }}":</h3>
+            <ul>
+            {% for movie in recommendations %}
+                <li>{{ movie }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
